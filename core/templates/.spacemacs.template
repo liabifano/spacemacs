@@ -53,12 +53,19 @@ values."
      javascript
      html
      docker
+     (themes-megapack     :packages (sanityinc-tomorrow-bright)) ;; <http://themegallery.robdor.com/>
+     (spacemacs-evil      :packages (evil-surround))
+     (spacemacs-ui-visual :packages spaceline)
+     (spacemacs-ui        :packages window-numbering)
+     (spacemacs-editing   :packages smartparens)
+     (spacemacs-editing-visual :packages rainbow-delimiters)
+     (spacemacs-layouts   :packages persp-mode eyebrowse)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(magithub)
+   dotspacemacs-additional-packages '(magithub editorconfig evil-quickscope)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -130,13 +137,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark)
+   dotspacemacs-themes '(sanityinc-tomorrow-bright)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 10
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -238,7 +245,7 @@ values."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-inactive-transparency 90
+   dotspacemacs-inactive-transparency 80
    ;; If non nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
    ;; If non nil show the color guide hint for transient state keys. (default t)
@@ -317,12 +324,12 @@ you should place your code here."
   (setenv "WORKON_HOME" "~/miniconda3/envs")
 
   ;; frame
-  (set-frame-parameter (selected-frame) 'alpha '(90 90))
-  (add-to-list 'default-frame-alist '(alpha 90 90))
+  (set-frame-parameter (selected-frame) 'alpha '(90 . 50))
+  (add-to-list 'default-frame-alist '(alpha . (90 . 50)))
+  (global-hl-line-mode 1)
+  (set-face-background hl-line-face "#3e4446")
   (set-cursor-color "DarkOrange")
   (setq-default cursor-type 'bar)
-  (global-hl-line-mode 0.5)
-  (set-face-background hl-line-face "#3e4446")
 
   ;; my shell
   (defun lb/shell ()
@@ -333,6 +340,51 @@ you should place your code here."
       (let ((bff (buffer-name)))
         (comint-send-string bff "cd\n")
         (comint-send-string bff ". ~/.bash_profile\n"))))
+
+  ;; (modify-syntax-entry ?_ "w")
+  ;; (let ((add-lisp-symbols-to-words #'(lambda ()
+  ;;                                      (modify-syntax-entry ?< "w")
+  ;;                                      (modify-syntax-entry ?> "w")
+  ;;                                      (modify-syntax-entry ?? "w")
+  ;;                                      (modify-syntax-entry ?! "w")
+  ;;                                      (modify-syntax-entry ?: "w")
+  ;;                                      (modify-syntax-entry ?/ "w")
+  ;;                                      (modify-syntax-entry ?- "w"))))
+  ;;   (add-hook 'clojure-mode-hook add-lisp-symbols-to-words)
+  ;;   (add-hook 'emacs-lisp-mode-hook add-lisp-symbols-to-words)
+  ;;   (add-hook 'lisp-mode-hook add-lisp-symbols-to-words))
+
+  ;;  (let ((evil-sexp-map-list `(("b" . sp-forward-barf-sexp)
+  ;;                             ("B" . sp-backward-barf-sexp)
+  ;;                             ("e" . evil-sexp-wrap-element)
+  ;;                             ("i" . evil-sexp-insert-at-end)
+  ;;                             ("I" . evil-sexp-insert-at-start)
+  ;;                             ("o" . evil-sexp-raise-sexp)
+  ;;                             ("O" . sp-raise-sexp)
+  ;;                             ("s" . sp-forward-slurp-sexp)
+  ;;                             ("S" . sp-backward-slurp-sexp)
+  ;;                             ("w" . evil-sexp-wrap-sexp)
+  ;;                             ("W" . sp-unwrap-sexp)
+  ;;                             (">" . evil-sexp-transpose-forward)
+  ;;                             ("<" . evil-sexp-transpose-backward)))
+  ;;       (evil-sexp-mappings (make-sparse-keymap)))
+  ;;   (dolist (current-mapping evil-sexp-map-list)
+  ;;     (let ((key (car current-mapping))
+  ;;           (cmd (cdr current-mapping)))
+  ;;       (define-key evil-sexp-mappings (kbd key) cmd)))
+  ;;   (spacemacs/set-leader-keys "k" evil-sexp-mappings))
+
+  ;; (defun kill-dired-buffers ()
+  ;;   (interactive)
+  ;;   (mapc (lambda (buffer)
+  ;;           (when (eq 'dired-mode (buffer-local-value 'major-mode buffer))
+  ;;             (kill-buffer buffer)))
+  ;;         (buffer-list)))
+
+  ;; (use-package smartparens
+  ;;   :config
+  ;;   (sp-pair "`" nil))
+  
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
