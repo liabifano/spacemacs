@@ -51,6 +51,7 @@ values."
      version-control
      python
      javascript
+     shell-scripts
      html
      docker
      (themes-megapack     :packages (sanityinc-tomorrow-bright)) ;; <http://themegallery.robdor.com/>
@@ -139,7 +140,7 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(sanityinc-tomorrow-bright)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
-   dotspacemacs-colorize-cursor-according-to-state t
+   dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
@@ -158,7 +159,8 @@ values."
    ;; (default "M-m")
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
-   ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
+   ;; pressing `<leader> m`
+   ;; Set it to `nil` to disable it. (default ",")
    dotspacemacs-major-mode-leader-key ","
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
@@ -269,7 +271,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -324,12 +326,14 @@ you should place your code here."
   (setenv "WORKON_HOME" "~/miniconda3/envs")
 
   ;; frame
-  (set-frame-parameter (selected-frame) 'alpha '(90 . 50))
-  (add-to-list 'default-frame-alist '(alpha . (90 . 50)))
+  (set-frame-parameter (selected-frame) 'alpha '(90 . 70))
+  (add-to-list 'default-frame-alist '(alpha . (90 . 70)))
   (global-hl-line-mode 1)
   (set-face-background hl-line-face "#3e4446")
   (set-cursor-color "DarkOrange")
   (setq-default cursor-type 'bar)
+
+  (setq-default mac-right-option-modifier nil)
 
   ;; my shell
   (defun lb/shell ()
