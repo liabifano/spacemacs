@@ -333,6 +333,7 @@ you should place your code here."
   (set-cursor-color "DarkOrange")
   (setq-default cursor-type 'bar)
 
+  (add-hook 'hack-local-variables-hook (lambda () (setq truncate-lines t)))
   (setq-default mac-right-option-modifier nil)
 
   ;; my shell
